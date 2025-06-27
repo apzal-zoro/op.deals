@@ -12,6 +12,7 @@ export type Deal = {
   comments: number;
   isHistoricLow?: boolean;
   category?: string;
+  keyshopRiskLevel?: number;
 };
 
 export type Software = {
@@ -27,4 +28,12 @@ export type Reward = {
     title: string;
     cost: number;
     icon: React.ComponentType<{ className?: string }>;
+};
+
+export type BannerDeal = {
+  id: string;
+  gameTitle: string;
+  imageUrl: string;
+  tagline: string;
+  link: string;
 };

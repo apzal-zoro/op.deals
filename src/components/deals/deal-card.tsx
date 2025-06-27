@@ -3,12 +3,13 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowBigUp, ArrowBigDown, MessageCircle, Flame } from 'lucide-react';
+import { ArrowBigUp, ArrowBigDown, MessageCircle, Flame, ShieldAlert } from 'lucide-react';
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { Deal } from '@/lib/types';
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
 export function DealCard({ deal, boxArtHint, storeLogoHint }: { deal: Deal, boxArtHint: string, storeLogoHint: string }) {
   const [votes, setVotes] = useState(deal.votes);
@@ -49,16 +50,32 @@ export function DealCard({ deal, boxArtHint, storeLogoHint }: { deal: Deal, boxA
         </CardHeader>
         <CardContent className="flex-grow p-3 space-y-2">
           <CardTitle className="font-headline text-base leading-tight truncate">{deal.gameTitle}</CardTitle>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center gap-2">
               <p className="text-xl font-headline text-accent">₹{deal.priceINR}</p>
-              <Image 
-                  src={deal.storeLogoUrl} 
-                  alt={deal.storeName} 
-                  width={80} 
-                  height={32}
-                  className="object-contain"
-                  data-ai-hint={storeLogoHint}
-              />
+              <div className="flex items-center gap-2">
+                {deal.isKeyshop && (
+                  <TooltipProvider delayDuration={100}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="flex items-center gap-1 text-xs text-destructive cursor-help">
+                          <ShieldAlert className="h-4 w-4" />
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent className="max-w-xs pixel-corners-sm">
+                        <p className="font-sans text-sm">Risk: {deal.keyshopRiskLevel}/5. Keyshops aren't official distributors. Purchase at your own risk.</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+                <Image 
+                    src={deal.storeLogoUrl} 
+                    alt={deal.storeName} 
+                    width={80} 
+                    height={32}
+                    className="object-contain"
+                    data-ai-hint={storeLogoHint}
+                />
+              </div>
           </div>
         </CardContent>
         <CardFooter className="p-2 border-t mt-auto">

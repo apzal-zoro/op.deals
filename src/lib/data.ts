@@ -1,6 +1,30 @@
-import type { Deal, Software, Reward } from './types';
+import type { Deal, Software, Reward, BannerDeal } from './types';
 import { BadgePercent, Ticket, Wallpaper } from 'lucide-react';
 import { GemIcon } from '@/components/icons/pixel-icons';
+
+export const mockBanners: BannerDeal[] = [
+  {
+    id: 'b1',
+    gameTitle: 'Elden Ring',
+    imageUrl: 'https://placehold.co/1200x400.png',
+    tagline: 'Become the Elden Lord. Now at its historic lowest price!',
+    link: '/games/3',
+  },
+  {
+    id: 'b2',
+    gameTitle: 'Indie Gems Bundle',
+    imageUrl: 'https://placehold.co/1200x400.png',
+    tagline: 'Discover hidden treasures with our curated indie collection.',
+    link: '/',
+  },
+  {
+    id: 'b3',
+    gameTitle: 'Cyberpunk 2077',
+    imageUrl: 'https://placehold.co/1200x400.png',
+    tagline: 'Wake up, Samurai. We have a city to burn. 50% off!',
+    link: '/games/1',
+  }
+];
 
 export const mockDeals: Deal[] = [
   {
@@ -15,6 +39,7 @@ export const mockDeals: Deal[] = [
     isKeyshop: false,
     votes: 125,
     comments: 42,
+    category: 'AAA',
   },
   {
     id: '2',
@@ -29,6 +54,7 @@ export const mockDeals: Deal[] = [
     votes: 302,
     comments: 89,
     isHistoricLow: true,
+    category: 'AAA',
   },
   {
     id: '3',
@@ -40,8 +66,10 @@ export const mockDeals: Deal[] = [
     storeLogoUrl: 'https://placehold.co/100x40.png',
     storeName: 'GreenManGaming',
     isKeyshop: true,
+    keyshopRiskLevel: 2,
     votes: 45,
     comments: 12,
+    category: 'AAA',
   },
   {
     id: '4',
@@ -67,8 +95,10 @@ export const mockDeals: Deal[] = [
     storeLogoUrl: 'https://placehold.co/100x40.png',
     storeName: 'Kinguin',
     isKeyshop: true,
+    keyshopRiskLevel: 4,
     votes: 88,
     comments: 31,
+    category: 'AAA',
   },
    {
     id: '6',
@@ -83,6 +113,34 @@ export const mockDeals: Deal[] = [
     votes: 210,
     comments: 77,
     category: 'indie',
+  },
+  {
+    id: '7',
+    gameTitle: 'Humble Choice',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    description: 'A monthly subscription bundle of PC games from Humble Bundle.',
+    discount: 0,
+    priceINR: 999,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'Humble Bundle',
+    isKeyshop: false,
+    votes: 150,
+    comments: 60,
+    category: 'bundle',
+  },
+  {
+    id: '8',
+    gameTitle: 'Fanatical Platinum Collection',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    description: 'Build your own bundle from a selection of platinum-rated Steam games.',
+    discount: 0,
+    priceINR: 829,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'Fanatical',
+    isKeyshop: false,
+    votes: 95,
+    comments: 25,
+    category: 'bundle',
   },
 ];
 
