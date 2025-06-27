@@ -1,4 +1,6 @@
-# Arthy Pixel Deals
+# Pixel Vault
+
+One stop destination for all your needs.
 
 This is a Next.js application built with Firebase Studio, designed to be a retro-themed hub for the best video game deals.
 

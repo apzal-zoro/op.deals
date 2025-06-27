@@ -10,6 +10,7 @@ export type Deal = {
   votes: number;
   comments: number;
   isHistoricLow?: boolean;
+  category?: string;
 };
 
 export type Software = {

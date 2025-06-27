@@ -51,6 +51,7 @@ export const mockDeals: Deal[] = [
     isKeyshop: false,
     votes: 512,
     comments: 150,
+    category: 'indie',
   },
    {
     id: '5',
@@ -75,6 +76,7 @@ export const mockDeals: Deal[] = [
     isKeyshop: false,
     votes: 210,
     comments: 77,
+    category: 'indie',
   },
 ];
 
