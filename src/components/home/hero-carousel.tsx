@@ -24,7 +24,7 @@ export function HeroCarousel({ banners }: { banners: BannerDeal[] }) {
         {banners.map((banner) => (
           <CarouselItem key={banner.id}>
             <Link href={banner.link} passHref>
-              <div className="relative aspect-[16/6] w-full overflow-hidden pixel-corners">
+              <div className="relative aspect-[16/6] w-full overflow-hidden rounded-lg">
                 <Image
                   src={banner.imageUrl}
                   alt={banner.gameTitle}
@@ -33,9 +33,9 @@ export function HeroCarousel({ banners }: { banners: BannerDeal[] }) {
                   data-ai-hint={`game banner ${banner.gameTitle}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent p-8 flex flex-col justify-center items-start text-white">
-                    <h2 className="text-3xl lg:text-5xl font-headline text-primary drop-shadow-lg">{banner.gameTitle}</h2>
-                    <p className="mt-2 text-base lg:text-lg max-w-md drop-shadow-md">{banner.tagline}</p>
-                    <Button className="mt-4 font-headline pixel-corners-sm">View Deal</Button>
+                    <h2 className="text-3xl lg:text-5xl text-primary drop-shadow-lg">{banner.gameTitle}</h2>
+                    <p className="mt-2 text-base lg:text-lg max-w-md drop-shadow-md font-body">{banner.tagline}</p>
+                    <Button className="mt-4 rounded-md">View Deal</Button>
                 </div>
               </div>
             </Link>

@@ -61,13 +61,13 @@ export default function DiggerPage() {
         <MainLayout>
             <div className="space-y-6">
                 <div className="text-center">
-                    <h1 className="text-2xl font-headline text-primary">Deal Digger</h1>
+                    <h1 className="text-2xl text-primary">Deal Digger</h1>
                     <p className="text-muted-foreground text-sm mt-2">
                         Dig for treasure! Unearth a deal with a historic low price.
                     </p>
                 </div>
                 
-                <div className="p-4 bg-card/50 pixel-corners mx-auto max-w-max">
+                <div className="p-4 bg-card/50 rounded-lg mx-auto max-w-max">
                     <div className="grid gap-1" style={{gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`}}>
                         {grid.map((cell, index) => (
                             <button
@@ -93,15 +93,15 @@ export default function DiggerPage() {
                 <div className="text-center">
                     <p className="font-headline">Dug: {dugCount}</p>
                     {gameOver && (
-                        <Button onClick={resetGame} className="mt-4 pixel-corners-sm font-headline">Play Again</Button>
+                        <Button onClick={resetGame} className="mt-4 rounded-md font-headline">Play Again</Button>
                     )}
                 </div>
             </div>
 
             <AlertDialog open={foundDeal} onOpenChange={setFoundDeal}>
-                <AlertDialogContent className="pixel-corners shadow-glow-primary border-primary">
+                <AlertDialogContent className="rounded-lg shadow-glow-primary border-primary">
                     <AlertDialogHeader>
-                        <AlertDialogTitle className="font-headline text-primary text-2xl flex items-center justify-center gap-2">
+                        <AlertDialogTitle className="text-primary text-2xl flex items-center justify-center gap-2">
                             <Flame /> BAHUBALI DEAL! <Flame />
                         </AlertDialogTitle>
                         <AlertDialogDescription className="text-center pt-2">
@@ -112,7 +112,7 @@ export default function DiggerPage() {
                         {historicDeal && <DealCard deal={historicDeal} boxArtHint="dark fantasy" storeLogoHint="gog" />}
                     </div>
                     <AlertDialogFooter>
-                        <AlertDialogAction className="w-full font-headline pixel-corners-sm">Awesome!</AlertDialogAction>
+                        <AlertDialogAction className="w-full font-headline rounded-md">Awesome!</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

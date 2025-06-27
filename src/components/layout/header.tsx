@@ -26,7 +26,7 @@ export function Header() {
     <header className="sticky top-0 z-10 flex h-16 items-center justify-between gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
       <div className="flex items-center gap-6">
         <Link href="/" className="flex items-center gap-2">
-            <h1 className="text-xl font-headline text-primary">Pixel Vault</h1>
+            <h1 className="text-xl text-primary">op.deals</h1>
         </Link>
         <nav className="hidden md:flex items-center gap-4">
             {navItems.map((item) => (
@@ -34,12 +34,12 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                        "flex items-center gap-2 text-sm font-headline transition-colors hover:text-primary",
+                        "flex items-center gap-2 text-sm transition-colors hover:text-primary",
                         pathname === item.href ? "text-primary" : "text-muted-foreground"
                     )}
                 >
                     <item.icon className="h-4 w-4" />
-                    <span>{item.label}</span>
+                    <span className="font-body">{item.label}</span>
                 </Link>
             ))}
         </nav>
@@ -54,13 +54,13 @@ export function Header() {
 
       <div className="flex items-center gap-4">
         <ThemeToggle />
-        <div className="flex items-center gap-2 rounded-full bg-card p-1 pr-3 pixel-corners-sm">
+        <div className="flex items-center gap-2 rounded-full bg-card p-1 pr-3">
           <CoinIcon className="h-6 w-6" />
-          <span className="font-headline text-sm text-primary">{coins}</span>
+          <span className="text-sm text-primary">{coins}</span>
         </div>
-        <Avatar className="h-8 w-8 pixel-corners">
+        <Avatar className="h-8 w-8 rounded-full">
             <AvatarImage src="https://placehold.co/40x40.png" alt="User" data-ai-hint="pixel avatar" />
-            <AvatarFallback>PV</AvatarFallback>
+            <AvatarFallback>OD</AvatarFallback>
         </Avatar>
       </div>
     </header>

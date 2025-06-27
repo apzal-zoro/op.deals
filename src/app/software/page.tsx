@@ -16,31 +16,31 @@ export default function SoftwarePage() {
   return (
     <MainLayout>
       <div className="space-y-6">
-        <h1 className="text-2xl font-headline text-primary">Software Keys</h1>
-        <p className="text-muted-foreground text-sm max-w-2xl">
+        <h1 className="text-2xl text-primary">Software Keys</h1>
+        <p className="text-muted-foreground text-sm max-w-2xl font-body">
             Power up your creative toolkit with our curated selection of software. Instant delivery, just like our game deals.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {mockSoftware.map(item => (
-                <Card key={item.id} className="flex flex-col overflow-hidden pixel-corners bg-card/80 backdrop-blur-sm transition-all hover:shadow-glow-accent">
+                <Card key={item.id} className="flex flex-col overflow-hidden rounded-lg bg-card/80 backdrop-blur-sm transition-all hover:shadow-glow-accent">
                     <CardHeader className="p-0">
                         <Image
                             src={item.imageUrl}
                             alt={item.name}
                             width={400}
                             height={200}
-                            className="w-full object-cover aspect-video pixel-corners"
+                            className="w-full object-cover aspect-video rounded-t-lg"
                             data-ai-hint={softwareHints[item.name] || 'software'}
                         />
                     </CardHeader>
                     <CardContent className="p-4 flex-grow">
-                        <CardTitle className="font-headline text-lg">{item.name}</CardTitle>
-                        <p className="text-muted-foreground text-xs mt-2">{item.description}</p>
+                        <CardTitle className="text-lg">{item.name}</CardTitle>
+                        <p className="text-muted-foreground text-xs mt-2 font-body">{item.description}</p>
                     </CardContent>
                     <CardFooter className="p-4 border-t mt-auto flex justify-between items-center">
-                        <p className="text-xl font-headline text-accent">₹{item.priceINR}</p>
-                        <Button className="font-headline text-xs pixel-corners-sm hover:shadow-glow-primary">
+                        <p className="text-xl text-accent">₹{item.priceINR}</p>
+                        <Button className="text-xs rounded-md hover:shadow-glow-primary">
                             <ShoppingCart className="mr-2 h-4 w-4"/>
                             Buy Now
                         </Button>

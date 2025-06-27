@@ -1,10 +1,23 @@
 import type {Metadata} from 'next';
+import { Press_Start_2P, Inter } from 'next/font/google'
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
+import { cn } from '@/lib/utils';
+
+const pressStart2P = Press_Start_2P({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-headline',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+})
 
 export const metadata: Metadata = {
-  title: 'Pixel Vault',
+  title: 'op.deals',
   description: 'One stop destination for all your needs.',
 };
 
@@ -15,12 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-body antialiased">
+      <body className={cn("antialiased", pressStart2P.variable, inter.variable)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

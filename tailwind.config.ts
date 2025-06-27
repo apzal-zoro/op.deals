@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['"Press Start 2P"', 'cursive'],
-        headline: ['"Press Start 2P"', 'cursive'],
+        body: ['var(--font-body)', 'sans-serif'],
+        headline: ['var(--font-headline)', 'cursive'],
         code: ['monospace'],
       },
       colors: {
@@ -67,13 +67,13 @@ export default {
         },
       },
       borderRadius: {
-        lg: '0px',
-        md: '0px',
-        sm: '0px',
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 4px)',
+        sm: 'calc(var(--radius) - 8px)',
       },
       boxShadow: {
-        'glow-accent': '0 0 8px hsl(var(--accent)), 0 0 16px hsl(var(--accent))',
-        'glow-primary': '0 0 8px hsl(var(--primary)), 0 0 16px hsl(var(--primary))',
+        'glow-accent': '0 0 10px hsl(var(--accent))',
+        'glow-primary': '0 0 10px hsl(var(--primary))',
       },
       keyframes: {
         'accordion-down': {

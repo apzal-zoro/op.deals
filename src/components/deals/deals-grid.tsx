@@ -15,8 +15,8 @@ const dataHints: { [key: string]: string } = {
 export function DealsGrid({ deals, className }: { deals: Deal[], className?: string }) {
   if (deals.length === 0) {
     return (
-      <div className="flex items-center justify-center h-64 border-2 border-dashed border-border pixel-corners">
-        <p className="text-muted-foreground font-headline">No deals found!</p>
+      <div className="flex items-center justify-center h-64 border-2 border-dashed border-border rounded-lg">
+        <p>No deals found!</p>
       </div>
     );
   }

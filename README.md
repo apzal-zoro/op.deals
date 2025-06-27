@@ -1,4 +1,4 @@
-# Pixel Vault
+# op.deals
 
 One stop destination for all your needs.
 
@@ -6,7 +6,7 @@ This is a Next.js application built with Firebase Studio, designed to be a retro
 
 ## Features
 
-- **Pixel-Themed UI**: A unique interface inspired by classic SNES and GameBoy games.
+- **Themed UI**: A unique interface inspired by modern gaming platforms like Discord and Steam.
 - **Deal Listings**: Browse the latest deals on PC games.
 - **Keyshop Toggle**: Choose to see deals from keyshops, with a clear warning about the risks.
 - **Software Store**: A dedicated section for software key deals.
