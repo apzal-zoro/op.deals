@@ -40,6 +40,8 @@
     --sidebar-accent-foreground: 240 5% 96%;
     --sidebar-border: 0 0% 18%;
     --sidebar-ring: 169 100% 50%;
+
+    --cursor-url: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 5v7m0 8v7m-11-7h7m8 0h7" stroke="%23FFD700" stroke-width="2" stroke-linecap="round"/></svg>');
   }
 
   .light {
@@ -73,18 +75,28 @@
     --sidebar-accent-foreground: 240 10% 4%;
     --sidebar-border: 214.3 31.8% 91.4%;
     --sidebar-ring: 169 80% 45%;
-  }
-}
 
-@layer base {
+    --cursor-url: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 5v7m0 8v7m-11-7h7m8 0h7" stroke="%23e3b31a" stroke-width="2" stroke-linecap="round"/></svg>');
+  }
+
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    cursor: var(--cursor-url) 16 16, auto;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-headline);
+  }
+  
+  /* Reset cursor for interactive and text elements */
+  a, button, [role="button"], input[type="submit"], input[type="button"], label, select, .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  input, textarea {
+    cursor: text;
   }
 }

@@ -75,13 +75,14 @@ export default function DiggerPage() {
                                 onClick={() => handleDig(index)}
                                 className={cn(
                                     "w-10 h-10 bg-repeat bg-center transition-colors",
-                                    cell === 'dirt' && "hover:bg-yellow-900/50 cursor-pointer",
+                                    cell === 'dirt' && "hover:bg-yellow-900/50",
                                     cell === 'empty' && "bg-background/50",
                                 )}
                                 style={{
                                     backgroundImage: getTileContent(cell),
                                     backgroundSize: 'cover',
                                     imageRendering: 'pixelated',
+                                    cursor: cell === 'dirt' ? 'pointer' : 'default',
                                 }}
                                 aria-label={`Dig at position ${index}`}
                                 disabled={gameOver}
@@ -93,7 +94,7 @@ export default function DiggerPage() {
                 <div className="text-center">
                     <p className="font-headline">Dug: {dugCount}</p>
                     {gameOver && (
-                        <Button onClick={resetGame} className="mt-4 rounded-md font-headline">Play Again</Button>
+                        <Button onClick={resetGame} className="mt-4 rounded-md font-headline hover:shadow-glow-primary">Play Again</Button>
                     )}
                 </div>
             </div>
