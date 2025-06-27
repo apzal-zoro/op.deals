@@ -1,31 +1,33 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { MainLayout } from '@/components/layout/main-layout';
-import { DealsGrid } from '@/components/deals/deals-grid';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { mockDeals, mockBanners } from '@/lib/data';
-import { ShieldAlert } from 'lucide-react';
 import { HeroCarousel } from '@/components/home/hero-carousel';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MostPopular } from '@/components/home/most-popular';
+import { DealList } from '@/components/home/deal-list';
 
 export default function HomePage() {
-  const [showKeyshops, setShowKeyshops] = useState(true);
+  const allDeals = useMemo(() => mockDeals, []);
 
-  const allDeals = useMemo(() => {
-    if (showKeyshops) {
-      return mockDeals;
-    }
-    return mockDeals.filter((deal) => !deal.isKeyshop);
-  }, [showKeyshops]);
-
-  const indieDeals = useMemo(() => {
-    return allDeals.filter(deal => deal.category === 'indie');
+  const popularDeals = useMemo(() => {
+    return [...allDeals].sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, 10);
   }, [allDeals]);
-  
-  const bundleDeals = useMemo(() => {
-    return allDeals.filter(deal => deal.category === 'bundle');
+
+  const newDeals = useMemo(() => {
+    return [...allDeals].sort((a, b) => new Date(b.releaseDate || 0).getTime() - new Date(a.releaseDate || 0).getTime()).slice(0, 5);
+  }, [allDeals]);
+
+  const bestDeals = useMemo(() => {
+    // 'Best' is subjective. Let's use votes for now.
+    return [...allDeals].sort((a, b) => (b.votes || 0) - (a.votes || 0)).slice(0, 5);
+  }, [allDeals]);
+
+  const historicalLows = useMemo(() => {
+    return allDeals.filter(deal => deal.isHistoricLow).slice(0, 5);
+  }, [allDeals]);
+
+  const indieGems = useMemo(() => {
+    return allDeals.filter(deal => deal.category === 'indie').slice(0, 5);
   }, [allDeals]);
 
   return (
@@ -33,45 +35,13 @@ export default function HomePage() {
       <div className="space-y-8">
         <HeroCarousel banners={mockBanners} />
         
-        <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <h2 className="text-2xl text-primary">Game Deals</h2>
-              <div className="flex items-center space-x-2">
-                  <Switch
-                      id="keyshop-toggle"
-                      checked={showKeyshops}
-                      onCheckedChange={setShowKeyshops}
-                  />
-                  <Label htmlFor="keyshop-toggle" className="text-xs">Show Keyshops</Label>
-              </div>
-          </div>
-          
-          {showKeyshops && (
-              <Alert variant="destructive" className="rounded-md bg-destructive/20 border-destructive/50 text-destructive-foreground">
-                  <ShieldAlert className="h-4 w-4" />
-                  <AlertTitle>Warning!</AlertTitle>
-                  <AlertDescription className="text-xs font-body">
-                      Keyshops are not official distributors. Purchase at your own risk. Keys may be revoked.
-                  </AlertDescription>
-              </Alert>
-          )}
+        <MostPopular deals={popularDeals} />
 
-          <Tabs defaultValue="all" className="w-full">
-            <TabsList className="rounded-md">
-              <TabsTrigger value="all" className="text-xs">All Deals</TabsTrigger>
-              <TabsTrigger value="indie" className="text-xs">Indie Gems</TabsTrigger>
-              <TabsTrigger value="bundles" className="text-xs">Bundles</TabsTrigger>
-            </TabsList>
-            <TabsContent value="all" className="mt-4">
-              <DealsGrid deals={allDeals} />
-            </TabsContent>
-            <TabsContent value="indie" className="mt-4">
-              <DealsGrid deals={indieDeals} />
-            </TabsContent>
-             <TabsContent value="bundles" className="mt-4">
-              <DealsGrid deals={bundleDeals} />
-            </TabsContent>
-          </Tabs>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <DealList title="New Deals" deals={newDeals} />
+            <DealList title="Best Deals" deals={bestDeals} />
+            <DealList title="Historical Lows" deals={historicalLows} />
+            <DealList title="Indie Gems" deals={indieGems} />
         </div>
       </div>
     </MainLayout>

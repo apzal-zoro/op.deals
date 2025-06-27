@@ -40,6 +40,8 @@ export const mockDeals: Deal[] = [
     votes: 125,
     comments: 42,
     category: 'AAA',
+    popularity: 95,
+    releaseDate: '2023-09-26',
     priceHistory: [
       { date: '2024-01-15', priceINR: 2999 },
       { date: '2024-02-20', priceINR: 2499 },
@@ -67,6 +69,8 @@ export const mockDeals: Deal[] = [
     comments: 89,
     isHistoricLow: true,
     category: 'AAA',
+    popularity: 98,
+    releaseDate: '2023-08-03',
      priceHistory: [
       { date: '2024-01-15', priceINR: 2999 },
       { date: '2024-02-20', priceINR: 2999 },
@@ -92,6 +96,8 @@ export const mockDeals: Deal[] = [
     votes: 45,
     comments: 12,
     category: 'AAA',
+    popularity: 99,
+    releaseDate: '2022-02-25',
   },
   {
     id: '4',
@@ -106,6 +112,8 @@ export const mockDeals: Deal[] = [
     votes: 512,
     comments: 150,
     category: 'indie',
+    popularity: 85,
+    releaseDate: '2016-02-26',
   },
    {
     id: '5',
@@ -121,6 +129,8 @@ export const mockDeals: Deal[] = [
     votes: 88,
     comments: 31,
     category: 'AAA',
+    popularity: 92,
+    releaseDate: '2015-05-19',
   },
    {
     id: '6',
@@ -135,6 +145,8 @@ export const mockDeals: Deal[] = [
     votes: 210,
     comments: 77,
     category: 'indie',
+    popularity: 88,
+    releaseDate: '2024-05-15',
   },
   {
     id: '7',
@@ -149,6 +161,8 @@ export const mockDeals: Deal[] = [
     votes: 150,
     comments: 60,
     category: 'bundle',
+    popularity: 70,
+    releaseDate: '2024-06-01',
   },
   {
     id: '8',
@@ -163,6 +177,8 @@ export const mockDeals: Deal[] = [
     votes: 95,
     comments: 25,
     category: 'bundle',
+    popularity: 65,
+    releaseDate: '2024-05-28',
   },
 ];
 

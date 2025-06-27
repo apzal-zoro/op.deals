@@ -27,6 +27,8 @@ export type Deal = {
   keyshopRiskLevel?: number;
   otherStores?: OtherStoreDeal[];
   priceHistory?: PriceHistoryPoint[];
+  popularity?: number;
+  releaseDate?: string;
 };
 
 export type Software = {
