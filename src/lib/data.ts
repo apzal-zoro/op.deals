@@ -1,0 +1,93 @@
+import type { Deal, Software, Reward } from './types';
+import { BadgePercent, Ticket, Wallpaper } from 'lucide-react';
+import { GemIcon } from '@/components/icons/pixel-icons';
+
+export const mockDeals: Deal[] = [
+  {
+    id: '1',
+    gameTitle: 'Cyberpunk 2077',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    discount: 50,
+    priceINR: 1499,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'Steam',
+    isKeyshop: false,
+    votes: 125,
+    comments: 42,
+  },
+  {
+    id: '2',
+    gameTitle: 'Baldur\'s Gate 3',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    discount: 10,
+    priceINR: 2699,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'GOG',
+    isKeyshop: false,
+    votes: 302,
+    comments: 89,
+    isHistoricLow: true,
+  },
+  {
+    id: '3',
+    gameTitle: 'Elden Ring',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    discount: 75,
+    priceINR: 899,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'GreenManGaming',
+    isKeyshop: true,
+    votes: 45,
+    comments: 12,
+  },
+  {
+    id: '4',
+    gameTitle: 'Stardew Valley',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    discount: 25,
+    priceINR: 359,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'Steam',
+    isKeyshop: false,
+    votes: 512,
+    comments: 150,
+  },
+   {
+    id: '5',
+    gameTitle: 'The Witcher 3',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    discount: 80,
+    priceINR: 200,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'Kinguin',
+    isKeyshop: true,
+    votes: 88,
+    comments: 31,
+  },
+   {
+    id: '6',
+    gameTitle: 'Hades',
+    boxArtUrl: 'https://placehold.co/300x400.png',
+    discount: 50,
+    priceINR: 284,
+    storeLogoUrl: 'https://placehold.co/100x40.png',
+    storeName: 'Epic Games',
+    isKeyshop: false,
+    votes: 210,
+    comments: 77,
+  },
+];
+
+export const mockSoftware: Software[] = [
+    { id: 's1', name: 'PixelOS Pro', imageUrl: 'https://placehold.co/300x200.png', priceINR: 4999, description: 'The ultimate pixel-perfect operating system for creators.' },
+    { id: 's2', name: 'Chiptune Composer', imageUrl: 'https://placehold.co/300x200.png', priceINR: 2499, description: 'Create authentic 8-bit and 16-bit soundtracks.' },
+    { id: 's3', name: 'SpriteVault', imageUrl: 'https://placehold.co/300x200.png', priceINR: 1999, description: 'A massive library of retro game assets.' },
+    { id: 's4', name: 'RetroFilter Suite', imageUrl: 'https://placehold.co/300x200.png', priceINR: 999, description: 'Apply CRT and pixelation effects to any image.' },
+];
+
+export const mockRewards: Reward[] = [
+    { id: 'r1', title: '10% Off Coupon', cost: 500, icon: BadgePercent },
+    { id: 'r2', title: 'Exclusive Wallpaper', cost: 100, icon: Wallpaper },
+    { id: 'r3', title: 'Raffle Ticket', cost: 50, icon: Ticket },
+    { id: 'r4', title: 'Premium Avatar', cost: 1000, icon: GemIcon },
+];
