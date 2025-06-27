@@ -1,10 +1,27 @@
 import { Header } from './header';
+import { AdPlaceholder } from './ad-placeholder';
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 w-full max-w-[1200px] mx-auto p-4">{children}</main>
+      <div className="w-full flex-grow flex justify-center">
+        <div className="flex w-full max-w-screen-2xl px-6 gap-6">
+          <aside className="hidden lg:block w-[160px] shrink-0 pt-6">
+            <div className="sticky top-20">
+              <AdPlaceholder side="left" />
+            </div>
+          </aside>
+          <main className="w-full min-w-0 max-w-[1200px] flex-grow pt-6">
+            {children}
+          </main>
+          <aside className="hidden lg:block w-[160px] shrink-0 pt-6">
+            <div className="sticky top-20">
+              <AdPlaceholder side="right" />
+            </div>
+          </aside>
+        </div>
+      </div>
     </div>
   );
 }

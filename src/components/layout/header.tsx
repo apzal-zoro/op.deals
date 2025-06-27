@@ -3,10 +3,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { Gamepad2, HardDrive, Sparkles, Search } from 'lucide-react';
+import { Gamepad2, HardDrive, Sparkles, Search, Swords, Gem, Coins } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CoinIcon, GemIcon, SwordIcon } from '@/components/icons/pixel-icons';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '../theme-toggle';
@@ -14,8 +13,8 @@ import { ThemeToggle } from '../theme-toggle';
 const navItems = [
   { href: '/', label: 'Game Deals', icon: Gamepad2 },
   { href: '/software', label: 'Software', icon: HardDrive },
-  { href: '/digger', label: 'Deal Digger', icon: SwordIcon },
-  { href: '/rewards', label: 'Rewards', icon: GemIcon },
+  { href: '/digger', label: 'Deal Digger', icon: Swords },
+  { href: '/rewards', label: 'Rewards', icon: Gem },
 ];
 
 export function Header() {
@@ -26,7 +25,7 @@ export function Header() {
     <header className="sticky top-0 z-10 flex h-16 items-center justify-between gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
       <div className="flex items-center gap-6">
         <Link href="/" className="flex items-center gap-2">
-            <h1 className="text-xl text-primary">op.deals</h1>
+            <h1 className="text-xl text-primary font-bold">op.deals</h1>
         </Link>
         <nav className="hidden md:flex items-center gap-4">
             {navItems.map((item) => (
@@ -39,7 +38,7 @@ export function Header() {
                     )}
                 >
                     <item.icon className="h-4 w-4" />
-                    <span className="font-body">{item.label}</span>
+                    <span className="font-medium">{item.label}</span>
                 </Link>
             ))}
         </nav>
@@ -55,11 +54,11 @@ export function Header() {
       <div className="flex items-center gap-4">
         <ThemeToggle />
         <div className="flex items-center gap-2 rounded-full bg-card p-1 pr-3">
-          <CoinIcon className="h-6 w-6" />
-          <span className="text-sm text-primary">{coins}</span>
+          <Coins className="h-6 w-6 text-primary" />
+          <span className="text-sm text-primary font-semibold">{coins}</span>
         </div>
         <Avatar className="h-8 w-8 rounded-full">
-            <AvatarImage src="https://placehold.co/40x40.png" alt="User" data-ai-hint="pixel avatar" />
+            <AvatarImage src="https://placehold.co/40x40.png" alt="User" data-ai-hint="gradient avatar" />
             <AvatarFallback>OD</AvatarFallback>
         </Avatar>
       </div>

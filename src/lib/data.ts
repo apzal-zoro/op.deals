@@ -1,6 +1,5 @@
 import type { Deal, Software, Reward, BannerDeal } from './types';
-import { BadgePercent, Ticket, Wallpaper } from 'lucide-react';
-import { GemIcon } from '@/components/icons/pixel-icons';
+import { BadgePercent, Ticket, Wallpaper, Gem } from 'lucide-react';
 
 export const mockBanners: BannerDeal[] = [
   {
@@ -193,5 +192,5 @@ export const mockRewards: Reward[] = [
     { id: 'r1', title: '10% Off Coupon', cost: 500, icon: BadgePercent },
     { id: 'r2', title: 'Exclusive Wallpaper', cost: 100, icon: Wallpaper },
     { id: 'r3', title: 'Raffle Ticket', cost: 50, icon: Ticket },
-    { id: 'r4', title: 'Premium Avatar', cost: 1000, icon: GemIcon },
+    { id: 'r4', title: 'Premium Avatar', cost: 1000, icon: Gem },
 ];
