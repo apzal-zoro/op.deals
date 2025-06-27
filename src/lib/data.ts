@@ -1,5 +1,4 @@
-import type { Deal, Software, Reward, BannerDeal } from './types';
-import { BadgePercent, Ticket, Wallpaper, Gem } from 'lucide-react';
+import type { Deal, Software, BannerDeal } from './types';
 
 export const mockBanners: BannerDeal[] = [
   {
@@ -186,11 +185,4 @@ export const mockSoftware: Software[] = [
     { id: 's2', name: 'Chiptune Composer', imageUrl: 'https://placehold.co/300x200.png', priceINR: 2499, description: 'Create authentic 8-bit and 16-bit soundtracks.' },
     { id: 's3', name: 'SpriteVault', imageUrl: 'https://placehold.co/300x200.png', priceINR: 1999, description: 'A massive library of retro game assets.' },
     { id: 's4', name: 'RetroFilter Suite', imageUrl: 'https://placehold.co/300x200.png', priceINR: 999, description: 'Apply CRT and pixelation effects to any image.' },
-];
-
-export const mockRewards: Reward[] = [
-    { id: 'r1', title: '10% Off Coupon', cost: 500, icon: BadgePercent },
-    { id: 'r2', title: 'Exclusive Wallpaper', cost: 100, icon: Wallpaper },
-    { id: 'r3', title: 'Raffle Ticket', cost: 50, icon: Ticket },
-    { id: 'r4', title: 'Premium Avatar', cost: 1000, icon: Gem },
 ];

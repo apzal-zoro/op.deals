@@ -39,13 +39,6 @@ export type Software = {
   description: string;
 };
 
-export type Reward = {
-    id: string;
-    title: string;
-    cost: number;
-    icon: React.ComponentType<{ className?: string }>;
-};
-
 export type BannerDeal = {
   id: string;
   gameTitle: string;
