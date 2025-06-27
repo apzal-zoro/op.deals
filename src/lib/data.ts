@@ -40,6 +40,18 @@ export const mockDeals: Deal[] = [
     votes: 125,
     comments: 42,
     category: 'AAA',
+    priceHistory: [
+      { date: '2024-01-15', priceINR: 2999 },
+      { date: '2024-02-20', priceINR: 2499 },
+      { date: '2024-03-10', priceINR: 1799 },
+      { date: '2024-04-25', priceINR: 1499 },
+      { date: '2024-05-30', priceINR: 1999 },
+    ],
+    otherStores: [
+      { storeName: 'GOG', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 1599, dealLink: '#' },
+      { storeName: 'Epic Games', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 2999, dealLink: '#' },
+      { storeName: 'GreenManGaming', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 1450, dealLink: '#' }
+    ]
   },
   {
     id: '2',
@@ -55,6 +67,16 @@ export const mockDeals: Deal[] = [
     comments: 89,
     isHistoricLow: true,
     category: 'AAA',
+     priceHistory: [
+      { date: '2024-01-15', priceINR: 2999 },
+      { date: '2024-02-20', priceINR: 2999 },
+      { date: '2024-03-10', priceINR: 2899 },
+      { date: '2024-04-25', priceINR: 2699 },
+      { date: '2024-05-30', priceINR: 2799 },
+    ],
+    otherStores: [
+      { storeName: 'Steam', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 2699, dealLink: '#' },
+    ]
   },
   {
     id: '3',

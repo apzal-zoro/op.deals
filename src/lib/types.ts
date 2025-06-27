@@ -1,3 +1,15 @@
+export type PriceHistoryPoint = {
+  date: string;
+  priceINR: number;
+};
+
+export type OtherStoreDeal = {
+  storeName: string;
+  storeLogoUrl: string;
+  priceINR: number;
+  dealLink: string;
+};
+
 export type Deal = {
   id: string;
   gameTitle: string;
@@ -13,6 +25,8 @@ export type Deal = {
   isHistoricLow?: boolean;
   category?: string;
   keyshopRiskLevel?: number;
+  otherStores?: OtherStoreDeal[];
+  priceHistory?: PriceHistoryPoint[];
 };
 
 export type Software = {

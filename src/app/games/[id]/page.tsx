@@ -4,13 +4,29 @@ import { MainLayout } from '@/components/layout/main-layout';
 import { mockDeals } from '@/lib/data';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Flame, ShoppingCart, Wand2, Loader2 } from 'lucide-react';
+import { Flame, ShoppingCart, Wand2, Tag, History, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { gamePageInsights, GamePageInsightsOutput } from '@/ai/flows';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Skeleton } from '@/components/ui/skeleton';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "@/components/ui/chart"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 // Mock data, in a real app this would come from user authentication
 const mockUserLibrary = ['The Witcher 3'];
@@ -20,15 +36,11 @@ export default function GamePage({ params }: { params: { id: string } }) {
   const deal = useMemo(() => mockDeals.find((d) => d.id === params.id), [params.id]);
   
   const [insight, setInsight] = useState<GamePageInsightsOutput | null>(null);
-  const [isInsightLoading, setIsInsightLoading] = useState(false);
+  const [isInsightLoading, setIsInsightLoading] = useState(true);
 
-  if (!deal) {
-    notFound();
-  }
-
-  const getInsight = async () => {
+  const getInsight = useCallback(async () => {
+    if (!deal) return;
     setIsInsightLoading(true);
-    setInsight(null);
     try {
         const result = await gamePageInsights({
             gameTitle: deal.gameTitle,
@@ -44,7 +56,15 @@ export default function GamePage({ params }: { params: { id: string } }) {
     } finally {
         setIsInsightLoading(false);
     }
-  };
+  }, [deal]);
+
+  useEffect(() => {
+    getInsight();
+  }, [getInsight]);
+
+  if (!deal) {
+    notFound();
+  }
 
   const backgroundStyle = {
     backgroundImage: `radial-gradient(ellipse at 70% 30%, hsla(var(--primary) / 0.1), transparent 50%), radial-gradient(ellipse at 30% 20%, hsla(var(--accent) / 0.1), transparent 50%), url(${deal.boxArtUrl})`,
@@ -64,81 +84,162 @@ export default function GamePage({ params }: { params: { id: string } }) {
   const boxArtHint = dataHints[deal.gameTitle] || 'video game';
   const storeLogoHint = deal.storeName.toLowerCase();
 
+  const chartConfig = {
+    price: {
+      label: "Price",
+      color: "hsl(var(--primary))",
+    },
+  } satisfies ChartConfig
+
+  const formattedPriceHistory = useMemo(() => {
+    return deal.priceHistory?.map(item => ({
+      ...item,
+      date: new Date(item.date).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+    }));
+  }, [deal.priceHistory]);
+
   return (
     <>
       <div className="fixed inset-0 -z-10" style={backgroundStyle} />
       <div className="fixed inset-0 -z-10 bg-background/80 backdrop-blur-md" />
       <MainLayout>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-foreground">
-          <div className="md:col-span-1">
-            <Image
-              src={deal.boxArtUrl}
-              alt={deal.gameTitle}
-              width={600}
-              height={800}
-              className="w-full object-cover aspect-[3/4] pixel-corners shadow-2xl shadow-black/50"
-              data-ai-hint={boxArtHint}
-            />
-          </div>
-          <div className="md:col-span-2 space-y-6">
-            <Card className="bg-card/70 backdrop-blur-sm pixel-corners">
-              <CardContent className="p-6 space-y-4">
-                <div className="flex justify-between items-start gap-4">
-                    <div>
-                        <h1 className="text-4xl font-headline text-primary">{deal.gameTitle}</h1>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Badge variant="destructive" className="pixel-corners-sm font-headline text-lg">-{deal.discount}%</Badge>
-                          {deal.isHistoricLow && (
-                            <Badge variant="default" className="pixel-corners-sm text-lg font-headline bg-primary/90 flex items-center gap-1 animate-pulse">
-                              <Flame className="h-5 w-5" /> HISTORIC LOW
-                            </Badge>
-                          )}
-                        </div>
-                    </div>
-                     <Image 
-                        src={deal.storeLogoUrl} 
-                        alt={deal.storeName} 
-                        width={120} 
-                        height={48}
-                        className="object-contain"
-                        data-ai-hint={storeLogoHint}
+        <div className="space-y-6 text-foreground">
+            {isInsightLoading ? (
+                <Skeleton className="h-12 w-full pixel-corners-sm" />
+            ) : insight && (
+                 <Alert className="pixel-corners-sm bg-card/70 backdrop-blur-sm border-primary/50">
+                    <Wand2 className="h-4 w-4 text-primary" />
+                    <AlertTitle className="font-headline text-primary">AI Insight</AlertTitle>
+                    <AlertDescription>{insight.insightMessage}</AlertDescription>
+                </Alert>
+            )}
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-1">
+                    <Image
+                    src={deal.boxArtUrl}
+                    alt={deal.gameTitle}
+                    width={600}
+                    height={800}
+                    className="w-full object-cover aspect-[3/4] pixel-corners shadow-2xl shadow-black/50"
+                    data-ai-hint={boxArtHint}
                     />
                 </div>
-                
-                <p className="text-base leading-relaxed">{deal.description}</p>
-                
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4">
-                    <p className="text-5xl font-headline text-accent">₹{deal.priceINR}</p>
-                    <Button size="lg" className="font-headline text-xl pixel-corners-sm w-full sm:w-auto hover:shadow-glow-primary">
-                        <ShoppingCart className="mr-4 h-8 w-8"/>
-                        Buy on {deal.storeName}
-                    </Button>
+                <div className="lg:col-span-2">
+                     <Card className="bg-card/70 backdrop-blur-sm pixel-corners h-full flex flex-col">
+                        <CardContent className="p-6 space-y-4 flex-grow">
+                            <div className="flex justify-between items-start gap-4">
+                                <div>
+                                    <h1 className="text-4xl font-headline text-primary">{deal.gameTitle}</h1>
+                                    <div className="flex items-center gap-2 mt-2">
+                                    <Badge variant="destructive" className="pixel-corners-sm font-headline text-lg">-{deal.discount}%</Badge>
+                                    {deal.isHistoricLow && (
+                                        <Badge variant="default" className="pixel-corners-sm text-lg font-headline bg-primary/90 flex items-center gap-1 animate-pulse">
+                                        <Flame className="h-5 w-5" /> HISTORIC LOW
+                                        </Badge>
+                                    )}
+                                    </div>
+                                </div>
+                                <Image 
+                                    src={deal.storeLogoUrl} 
+                                    alt={deal.storeName} 
+                                    width={120} 
+                                    height={48}
+                                    className="object-contain"
+                                    data-ai-hint={storeLogoHint}
+                                />
+                            </div>
+                            
+                            <p className="text-base leading-relaxed">{deal.description}</p>
+                        </CardContent>
+                        <CardFooter className="p-6 border-t border-border/50">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 w-full">
+                                <p className="text-5xl font-headline text-accent">₹{deal.priceINR}</p>
+                                <Button size="lg" className="font-headline text-xl pixel-corners-sm w-full sm:w-auto hover:shadow-glow-primary">
+                                    <ShoppingCart className="mr-4 h-8 w-8"/>
+                                    Buy on {deal.storeName}
+                                </Button>
+                            </div>
+                        </CardFooter>
+                    </Card>
                 </div>
-              </CardContent>
-            </Card>
+            </div>
 
-            <Card className="pixel-corners bg-card/70 backdrop-blur-sm">
-                <CardHeader>
-                    <CardTitle className="font-headline text-lg flex items-center gap-2">
-                       <Wand2 className="text-primary"/> AI Assistant
-                    </CardTitle>
-                    <CardDescription>Get a personalized insight on this deal.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                     <Button onClick={getInsight} disabled={isInsightLoading} className="font-headline pixel-corners-sm">
-                        {isInsightLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
-                        Get AI Insight
-                    </Button>
-                    {insight && (
-                         <Alert className="pixel-corners-sm mt-4">
-                            <AlertTitle className="font-headline text-primary">Insight:</AlertTitle>
-                            <AlertDescription>{insight.insightMessage}</AlertDescription>
-                        </Alert>
-                    )}
-                </CardContent>
-            </Card>
+            {deal.priceHistory && deal.priceHistory.length > 0 && (
+                 <Card className="pixel-corners bg-card/70 backdrop-blur-sm">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-lg flex items-center gap-2">
+                        <History className="text-primary"/> Price History
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+                            <AreaChart data={formattedPriceHistory} margin={{ left: -20, right: 20, top: 10, bottom: 0}}>
+                                <defs>
+                                    <linearGradient id="fillPrice" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8} />
+                                    <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.1} />
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="hsl(var(--border) / 0.5)" />
+                                <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} tick={{fill: 'hsl(var(--muted-foreground))', fontSize: 12}} />
+                                <YAxis tickLine={false} axisLine={false} tickMargin={8} tickFormatter={(value) => `₹${value}`} tick={{fill: 'hsl(var(--muted-foreground))', fontSize: 12}} />
+                                <ChartTooltip 
+                                    cursor={{ stroke: 'hsl(var(--accent))', strokeWidth: 1, strokeDasharray: '3 3' }}
+                                    content={<ChartTooltipContent indicator="line" />} 
+                                />
+                                <Area dataKey="priceINR" type="monotone" fill="url(#fillPrice)" stroke="hsl(var(--primary))" strokeWidth={2} name="Price" />
+                            </AreaChart>
+                        </ChartContainer>
+                    </CardContent>
+                </Card>
+            )}
 
-          </div>
+            {deal.otherStores && deal.otherStores.length > 0 && (
+                <Card className="pixel-corners bg-card/70 backdrop-blur-sm">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-lg flex items-center gap-2">
+                           <Tag className="text-primary"/> Compare Prices
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className="font-headline">Store</TableHead>
+                                    <TableHead className="font-headline text-right">Price</TableHead>
+                                    <TableHead></TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {deal.otherStores.map((storeDeal) => (
+                                <TableRow key={storeDeal.storeName}>
+                                    <TableCell className="flex items-center gap-4">
+                                        <Image
+                                            src={storeDeal.storeLogoUrl}
+                                            alt={storeDeal.storeName}
+                                            width={80}
+                                            height={30}
+                                            className="object-contain"
+                                            data-ai-hint={storeDeal.storeName.toLowerCase()}
+                                        />
+                                        <span>{storeDeal.storeName}</span>
+                                    </TableCell>
+                                    <TableCell className="text-right font-headline text-accent">₹{storeDeal.priceINR}</TableCell>
+                                    <TableCell className="text-right">
+                                        <Button asChild variant="secondary" className="pixel-corners-sm">
+                                            <a href={storeDeal.dealLink} target="_blank" rel="noopener noreferrer">
+                                                Go to deal <ExternalLink className="ml-2 h-4 w-4" />
+                                            </a>
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </CardContent>
+                </Card>
+            )}
         </div>
       </MainLayout>
     </>

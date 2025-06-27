@@ -15,7 +15,6 @@ const navItems = [
   { href: '/', label: 'Game Deals', icon: Gamepad2 },
   { href: '/software', label: 'Software', icon: HardDrive },
   { href: '/digger', label: 'Deal Digger', icon: SwordIcon },
-  { href: '/recommendations', label: 'AI Picks', icon: Sparkles },
   { href: '/rewards', label: 'Rewards', icon: GemIcon },
 ];
 
