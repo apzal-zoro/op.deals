@@ -4,18 +4,47 @@ import { MainLayout } from '@/components/layout/main-layout';
 import { mockDeals } from '@/lib/data';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Flame, ShoppingCart } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Flame, ShoppingCart, Wand2, Loader2 } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { gamePageInsights, GamePageInsightsOutput } from '@/ai/flows';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
+// Mock data, in a real app this would come from user authentication
+const mockUserLibrary = ['The Witcher 3'];
+const mockUserWishlist = ["Baldur's Gate 3", 'Cyberpunk 2077'];
 
 export default function GamePage({ params }: { params: { id: string } }) {
   const deal = useMemo(() => mockDeals.find((d) => d.id === params.id), [params.id]);
+  
+  const [insight, setInsight] = useState<GamePageInsightsOutput | null>(null);
+  const [isInsightLoading, setIsInsightLoading] = useState(false);
 
   if (!deal) {
     notFound();
   }
+
+  const getInsight = async () => {
+    setIsInsightLoading(true);
+    setInsight(null);
+    try {
+        const result = await gamePageInsights({
+            gameTitle: deal.gameTitle,
+            currentPriceINR: deal.priceINR,
+            isHistoricLow: !!deal.isHistoricLow,
+            gameLibrary: mockUserLibrary,
+            wishlist: mockUserWishlist,
+            description: deal.description
+        });
+        setInsight(result);
+    } catch (error) {
+        console.error("Failed to get insight:", error);
+    } finally {
+        setIsInsightLoading(false);
+    }
+  };
 
   const backgroundStyle = {
     backgroundImage: `radial-gradient(ellipse at 70% 30%, hsla(var(--primary) / 0.1), transparent 50%), radial-gradient(ellipse at 30% 20%, hsla(var(--accent) / 0.1), transparent 50%), url(${deal.boxArtUrl})`,
@@ -87,6 +116,28 @@ export default function GamePage({ params }: { params: { id: string } }) {
                 </div>
               </CardContent>
             </Card>
+
+            <Card className="pixel-corners bg-card/70 backdrop-blur-sm">
+                <CardHeader>
+                    <CardTitle className="font-headline text-lg flex items-center gap-2">
+                       <Wand2 className="text-primary"/> AI Assistant
+                    </CardTitle>
+                    <CardDescription>Get a personalized insight on this deal.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                     <Button onClick={getInsight} disabled={isInsightLoading} className="font-headline pixel-corners-sm">
+                        {isInsightLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
+                        Get AI Insight
+                    </Button>
+                    {insight && (
+                         <Alert className="pixel-corners-sm mt-4">
+                            <AlertTitle className="font-headline text-primary">Insight:</AlertTitle>
+                            <AlertDescription>{insight.insightMessage}</AlertDescription>
+                        </Alert>
+                    )}
+                </CardContent>
+            </Card>
+
           </div>
         </div>
       </MainLayout>
