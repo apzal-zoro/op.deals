@@ -2,6 +2,7 @@ export type Deal = {
   id: string;
   gameTitle: string;
   boxArtUrl: string;
+  description: string;
   discount: number;
   priceINR: number;
   storeLogoUrl: string;

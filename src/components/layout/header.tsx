@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CoinIcon, GemIcon, SwordIcon } from '@/components/icons/pixel-icons';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '../theme-toggle';
 
 const navItems = [
   { href: '/', label: 'Game Deals', icon: Gamepad2 },
@@ -53,6 +54,7 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-4">
+        <ThemeToggle />
         <div className="flex items-center gap-2 rounded-full bg-card p-1 pr-3 pixel-corners-sm">
           <CoinIcon className="h-6 w-6" />
           <span className="font-headline text-sm text-primary">{coins}</span>
