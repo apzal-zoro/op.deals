@@ -3,7 +3,7 @@
 import { MainLayout } from '@/components/layout/main-layout';
 import { mockDeals } from '@/lib/data';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -32,7 +32,8 @@ import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 const mockUserLibrary = ['The Witcher 3'];
 const mockUserWishlist = ["Baldur's Gate 3", 'Cyberpunk 2077'];
 
-export default function GamePage({ params }: { params: { id: string } }) {
+export default function GamePage() {
+  const params = useParams() as { id: string };
   const deal = useMemo(() => mockDeals.find((d) => d.id === params.id), [params.id]);
   
   const [insight, setInsight] = useState<GamePageInsightsOutput | null>(null);
