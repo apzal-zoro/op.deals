@@ -57,7 +57,7 @@ export function Header() {
     <header className="sticky top-0 z-20 flex flex-col border-b bg-background/95 backdrop-blur-sm">
       {/* Top bar */}
       <div className="w-full">
-        <div className="mx-auto flex h-10 w-full max-w-screen-2xl items-center justify-end gap-6 px-6 text-sm text-muted-foreground">
+        <div className="mx-auto flex h-10 w-full max-w-[1200px] items-center justify-end gap-6 px-6 text-sm text-muted-foreground">
            <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="gap-1">
@@ -116,7 +116,7 @@ export function Header() {
 
       {/* Main header */}
       <div className="w-full">
-        <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between gap-6 px-6">
+        <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 px-6">
             <div className="flex items-center gap-6">
                 <Link href="/" className="flex items-center gap-2">
                     <h1 className="text-xl text-primary font-bold">op.deals</h1>
