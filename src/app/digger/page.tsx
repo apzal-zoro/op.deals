@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 import { Flame } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { DealCard } from '@/components/deals/deal-card';
-import { PlatformSelector } from '@/components/home/platform-selector';
 
 const GRID_SIZE = 8;
 const DIRT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M0,0H2V1H3V2H5V1H7V0H8V1H9V2H10V5H9V6H8V7H7V8H6V9H4V8H3V7H2V6H1V5H0V0ZM1,1V4H2V5H3V6H4V7H6V6H7V5H8V4H9V1H8V2H7V3H5V2H3V1H2V2H1Z" fill="#A0522D"/></svg>`;
@@ -60,7 +59,6 @@ export default function DiggerPage() {
 
     return (
         <MainLayout>
-            <PlatformSelector />
             <div className="space-y-6 pt-8">
                 <div className="text-center">
                     <h1 className="text-2xl text-primary">Deal Digger</h1>

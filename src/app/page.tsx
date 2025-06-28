@@ -8,7 +8,6 @@ import { DealList } from '@/components/home/deal-list';
 import { useSettings } from '@/contexts/settings-context';
 import type { Deal } from '@/lib/types';
 import { getBestPriceDeal } from '@/lib/utils';
-import { PlatformSelector } from '@/components/home/platform-selector';
 
 export default function HomePage() {
   const { keyshopsEnabled } = useSettings();
@@ -47,8 +46,6 @@ export default function HomePage() {
     <MainLayout>
       <div className="space-y-8">
         <HeroCarousel banners={mockBanners} />
-        
-        <PlatformSelector />
         
         <MostPopular deals={popularDeals} />
 
