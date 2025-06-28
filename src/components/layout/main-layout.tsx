@@ -32,7 +32,11 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 <TopAdPlaceholder />
               </div>
             )}
-            {showPlatformSelector && <PlatformSelector />}
+            {showPlatformSelector && (
+              <div className="mb-6">
+                <PlatformSelector />
+              </div>
+            )}
             {children}
           </main>
 

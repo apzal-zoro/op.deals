@@ -14,7 +14,7 @@ const platforms = [
 
 export function PlatformSelector() {
     return (
-        <div className="w-full flex justify-center bg-card/50 p-2 rounded-lg my-6">
+        <div className="w-full flex justify-center bg-card/50 p-2 rounded-lg">
             <RadioGroup defaultValue="all" className="flex items-center gap-2">
                 {platforms.map(platform => (
                     <div key={platform.id} className="flex items-center">
