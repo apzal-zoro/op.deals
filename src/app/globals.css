@@ -4,7 +4,10 @@
 
 @layer base {
   :root {
-    --background: 0 0% 5%; /* #0D0D0D */
+    --background: 0 0% 5%; /* For solid component backgrounds */
+    --background-start: 220 40% 8%; /* Deep Blue */
+    --background-end: 270 40% 10%; /* Dark Purple */
+    
     --foreground: 240 5% 96%; /* #F4F4F5 */
     --card: 0 0% 10%; /* #1A1A1A */
     --card-foreground: 240 5% 96%; /* #F4F4F5 */
@@ -45,7 +48,10 @@
   }
 
   .light {
-    --background: 260 100% 99%; /* Very light lavender */
+    --background: 260 100% 99%; /* For solid component backgrounds */
+    --background-start: 10 100% 98%; /* Light Peachy Pink */
+    --background-end: 260 100% 99%; /* Light Lavender */
+
     --foreground: 256 25% 20%; /* Dark slate purple */
     --card: 0 0% 100%; /* White */
     --card-foreground: 256 25% 20%;
@@ -83,7 +89,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: hsl(var(--background-end)); /* Fallback */
+    background-image: linear-gradient(160deg, hsl(var(--background-start)) 0%, hsl(var(--background-end)) 100%);
     font-family: var(--font-body);
     cursor: var(--cursor-url) 16 16, auto;
   }
