@@ -96,8 +96,9 @@ export function Header() {
                 <DropdownMenuContent align="end" className="w-[40rem] p-2">
                      <div className="grid grid-cols-3 gap-1">
                         {currencies.map(currency => (
-                             <DropdownMenuItem key={currency.code}>
-                                <span className="mr-2 font-bold w-4">{currency.symbol}</span> {currency.name} ({currency.code})
+                             <DropdownMenuItem key={currency.code} className="text-xs">
+                                <span className="mr-2 inline-block w-6 text-center font-bold">{currency.symbol}</span>
+                                <span>{currency.name} ({currency.code})</span>
                             </DropdownMenuItem>
                         ))}
                     </div>
