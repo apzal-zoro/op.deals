@@ -7,6 +7,7 @@ import { dealRecommendations, DealRecommendationsOutput, smartDealAlerts, SmartD
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { PlatformSelector } from '@/components/home/platform-selector';
 
 // Mock data to send to the AI
 const mockRecommendationInput = {
@@ -61,7 +62,8 @@ export default function RecommendationsPage() {
 
     return (
         <MainLayout>
-            <div className="space-y-8">
+            <PlatformSelector />
+            <div className="space-y-8 pt-8">
                 <div>
                     <h1 className="text-2xl text-primary">AI-Powered Insights</h1>
                     <p className="text-muted-foreground text-sm mt-2 max-w-2xl font-body">

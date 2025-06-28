@@ -1,7 +1,5 @@
 import { Header } from './header';
 import { AdPlaceholder } from './ad-placeholder';
-import { TopAdPlaceholder } from './top-ad-placeholder';
-import { PlatformSelector } from '../home/platform-selector';
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,8 +13,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             </div>
           </aside>
           <main className="w-full min-w-0 max-w-[1200px] flex-grow pt-6 pb-12">
-            <TopAdPlaceholder />
-            <PlatformSelector />
             {children}
           </main>
           <aside className="hidden lg:block w-[160px] shrink-0 pt-6">

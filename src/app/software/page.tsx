@@ -4,6 +4,7 @@ import { mockSoftware } from '@/lib/data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart } from 'lucide-react';
+import { PlatformSelector } from '@/components/home/platform-selector';
 
 const softwareHints: { [key: string]: string } = {
     'PixelOS Pro': 'pixel software',
@@ -15,7 +16,8 @@ const softwareHints: { [key: string]: string } = {
 export default function SoftwarePage() {
   return (
     <MainLayout>
-      <div className="space-y-6">
+      <PlatformSelector />
+      <div className="space-y-6 pt-8">
         <h1 className="text-2xl text-primary">Software Keys</h1>
         <p className="text-muted-foreground text-sm max-w-2xl font-body">
             Power up your creative toolkit with our curated selection of software. Instant delivery, just like our game deals.
