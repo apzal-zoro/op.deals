@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { UserCircle } from "lucide-react";
 
 // Simple SVG icons for brands
 const SteamIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.25c5.385 0 9.75 4.365 9.75 9.75s-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12 6.615 2.25 12 2.25zM9.54 8.789l-2.02 1.614 1.135 1.51-1.39.993-2.12-2.82.915-.688 2.56 1.94-.08-3.08h2.09l-.1 3.535 4.28-3.535h2.46l-4.78 3.92 3.1 4.14-.91.68-2.31-3.08-2.61 2.12h-2.1l2.7-2.2-1.04-1.39zm3.83 2.055l.895-1.08.01.01 1.775 2.155-1.125.925-.875-1.065-.01-.01-1.78-2.155 1.11-.92z"/></svg>
@@ -19,7 +20,10 @@ export function LoginDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="rounded-md">Sign In</Button>
+        <Button variant="ghost" size="icon">
+            <UserCircle />
+            <span className="sr-only">Login</span>
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] rounded-lg">
         <DialogHeader>

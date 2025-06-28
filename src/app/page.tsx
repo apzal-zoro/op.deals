@@ -1,16 +1,26 @@
 'use client';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { MainLayout } from '@/components/layout/main-layout';
 import { mockDeals, mockBanners } from '@/lib/data';
 import { HeroCarousel } from '@/components/home/hero-carousel';
 import { MostPopular } from '@/components/home/most-popular';
 import { DealList } from '@/components/home/deal-list';
+import { PlatformSelector } from '@/components/home/platform-selector';
+import { useSettings } from '@/contexts/settings-context';
+import type { Deal } from '@/lib/types';
+import { getBestPriceDeal } from '@/lib/utils';
 
 export default function HomePage() {
-  const allDeals = useMemo(() => mockDeals, []);
+  const { keyshopsEnabled } = useSettings();
+  
+  const allDeals = useMemo(() => {
+    // This is where you would filter deals based on keyshopsEnabled if the API supported it.
+    // For now, we pass the toggle to each component to decide which price to show.
+    return mockDeals;
+  }, []);
 
   const popularDeals = useMemo(() => {
-    return [...allDeals].sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, 10);
+    return [...allDeals].sort((a, b) => (a.rank || 99) - (b.rank || 99)).slice(0, 10);
   }, [allDeals]);
 
   const newDeals = useMemo(() => {
@@ -23,8 +33,11 @@ export default function HomePage() {
   }, [allDeals]);
 
   const historicalLows = useMemo(() => {
-    return allDeals.filter(deal => deal.isHistoricLow).slice(0, 5);
-  }, [allDeals]);
+    return allDeals.filter(deal => {
+        const bestPrice = getBestPriceDeal(deal, keyshopsEnabled);
+        return deal.isHistoricLow && bestPrice.priceINR === deal.priceINR;
+    }).slice(0, 5);
+  }, [allDeals, keyshopsEnabled]);
 
   const indieGems = useMemo(() => {
     return allDeals.filter(deal => deal.category === 'indie').slice(0, 5);
@@ -35,6 +48,8 @@ export default function HomePage() {
       <div className="space-y-8">
         <HeroCarousel banners={mockBanners} />
         
+        <PlatformSelector />
+
         <MostPopular deals={popularDeals} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

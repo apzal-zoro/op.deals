@@ -8,6 +8,7 @@ export type OtherStoreDeal = {
   storeLogoUrl: string;
   priceINR: number;
   dealLink: string;
+  isKeyshop?: boolean;
 };
 
 export type Deal = {
@@ -29,6 +30,7 @@ export type Deal = {
   priceHistory?: PriceHistoryPoint[];
   popularity?: number;
   releaseDate?: string;
+  rank?: number;
 };
 
 export type Software = {

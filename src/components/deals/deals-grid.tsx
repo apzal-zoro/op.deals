@@ -27,8 +27,7 @@ export function DealsGrid({ deals, className }: { deals: Deal[], className?: str
         <DealCard 
             key={deal.id} 
             deal={deal} 
-            boxArtHint={dataHints[deal.gameTitle] || 'video game'} 
-            storeLogoHint={deal.storeName.toLowerCase()}
+            boxArtHint={dataHints[deal.gameTitle] || 'video game'}
         />
       ))}
     </div>

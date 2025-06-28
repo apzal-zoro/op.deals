@@ -16,7 +16,7 @@ export function DealList({ title, deals, seeAllLink = '#' }: { title: string, de
             <CardContent className="p-2 pt-0">
                 <div className="space-y-1">
                     {deals.map(deal => (
-                         <DealListItem key={deal.id} deal={deal} storeLogoHint={deal.storeName.toLowerCase()} />
+                         <DealListItem key={deal.id} deal={deal} />
                     ))}
                 </div>
             </CardContent>

@@ -8,17 +8,23 @@ import { ArrowBigUp, ArrowBigDown, MessageCircle, Flame, ShieldAlert } from 'luc
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import type { Deal } from '@/lib/types';
+import type { Deal, OtherStoreDeal } from '@/lib/types';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { useSettings } from '@/contexts/settings-context';
+import { getBestPriceDeal } from '@/lib/utils';
 
-export function DealCard({ deal, boxArtHint, storeLogoHint }: { deal: Deal, boxArtHint: string, storeLogoHint: string }) {
+export function DealCard({ deal, boxArtHint }: { deal: Deal, boxArtHint: string }) {
   const [votes, setVotes] = useState(deal.votes);
+  const { keyshopsEnabled } = useSettings();
 
   const handleVote = (e: React.MouseEvent, amount: number) => {
     e.preventDefault();
     e.stopPropagation();
     setVotes(v => v + amount);
   }
+
+  const bestPriceDeal = getBestPriceDeal(deal, keyshopsEnabled);
+  const storeLogoHint = bestPriceDeal.storeName.toLowerCase();
 
   return (
     <Link href={`/games/${deal.id}`} passHref className="h-full block">
@@ -51,9 +57,9 @@ export function DealCard({ deal, boxArtHint, storeLogoHint }: { deal: Deal, boxA
         <CardContent className="flex-grow p-3 space-y-2">
           <CardTitle className="text-base leading-tight truncate">{deal.gameTitle}</CardTitle>
           <div className="flex justify-between items-center gap-2">
-              <p className="text-xl text-accent">₹{deal.priceINR}</p>
+              <p className="text-xl text-accent">₹{bestPriceDeal.priceINR}</p>
               <div className="flex items-center gap-2">
-                {deal.isKeyshop && (
+                {bestPriceDeal.isKeyshop && (
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -62,14 +68,14 @@ export function DealCard({ deal, boxArtHint, storeLogoHint }: { deal: Deal, boxA
                         </span>
                       </TooltipTrigger>
                       <TooltipContent className="max-w-xs rounded-md">
-                        <p className="font-body text-sm">Risk: {deal.keyshopRiskLevel}/5. Keyshops aren't official distributors. Purchase at your own risk.</p>
+                        <p className="font-body text-sm">This is a keyshop. They aren't official distributors. Purchase at your own risk.</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
                 )}
                 <Image 
-                    src={deal.storeLogoUrl} 
-                    alt={deal.storeName} 
+                    src={bestPriceDeal.storeLogoUrl} 
+                    alt={bestPriceDeal.storeName} 
                     width={80} 
                     height={32}
                     className="object-contain"

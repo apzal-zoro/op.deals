@@ -39,6 +39,7 @@ export const mockDeals: Deal[] = [
     comments: 42,
     category: 'AAA',
     popularity: 95,
+    rank: 4,
     releaseDate: '2023-09-26',
     priceHistory: [
       { date: '2024-01-15', priceINR: 2999 },
@@ -48,9 +49,9 @@ export const mockDeals: Deal[] = [
       { date: '2024-05-30', priceINR: 1999 },
     ],
     otherStores: [
-      { storeName: 'GOG', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 1599, dealLink: '#' },
-      { storeName: 'Epic Games', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 2999, dealLink: '#' },
-      { storeName: 'GreenManGaming', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 1450, dealLink: '#' }
+      { storeName: 'GOG', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 1599, dealLink: '#', isKeyshop: false },
+      { storeName: 'Epic Games', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 2999, dealLink: '#', isKeyshop: false },
+      { storeName: 'GreenManGaming', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 1450, dealLink: '#', isKeyshop: true }
     ]
   },
   {
@@ -68,6 +69,7 @@ export const mockDeals: Deal[] = [
     isHistoricLow: true,
     category: 'AAA',
     popularity: 98,
+    rank: 2,
     releaseDate: '2023-08-03',
      priceHistory: [
       { date: '2024-01-15', priceINR: 2999 },
@@ -77,7 +79,7 @@ export const mockDeals: Deal[] = [
       { date: '2024-05-30', priceINR: 2799 },
     ],
     otherStores: [
-      { storeName: 'Steam', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 2699, dealLink: '#' },
+      { storeName: 'Steam', storeLogoUrl: 'https://placehold.co/100x40.png', priceINR: 2699, dealLink: '#', isKeyshop: false },
     ]
   },
   {
@@ -95,6 +97,7 @@ export const mockDeals: Deal[] = [
     comments: 12,
     category: 'AAA',
     popularity: 99,
+    rank: 1,
     releaseDate: '2022-02-25',
   },
   {
@@ -111,6 +114,7 @@ export const mockDeals: Deal[] = [
     comments: 150,
     category: 'indie',
     popularity: 85,
+    rank: 5,
     releaseDate: '2016-02-26',
   },
    {
@@ -128,6 +132,7 @@ export const mockDeals: Deal[] = [
     comments: 31,
     category: 'AAA',
     popularity: 92,
+    rank: 6,
     releaseDate: '2015-05-19',
   },
    {
@@ -144,6 +149,7 @@ export const mockDeals: Deal[] = [
     comments: 77,
     category: 'indie',
     popularity: 88,
+    rank: 3,
     releaseDate: '2024-05-15',
   },
   {

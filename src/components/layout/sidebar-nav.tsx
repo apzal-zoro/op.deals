@@ -1,21 +1,20 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Gamepad2, HardDrive, Sparkles } from 'lucide-react';
+import { Gamepad2, HardDrive, Sparkles, Library, Swords } from 'lucide-react';
 
 import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
 } from '@/components/ui/sidebar';
-import { GemIcon, SwordIcon } from '@/components/icons/pixel-icons';
 
 const navItems = [
   { href: '/', label: 'Game Deals', icon: Gamepad2 },
   { href: '/software', label: 'Software', icon: HardDrive },
-  { href: '/digger', label: 'Deal Digger', icon: SwordIcon },
+  { href: '/digger', label: 'Deal Digger', icon: Swords },
   { href: '/recommendations', label: 'AI Picks', icon: Sparkles },
-  { href: '/rewards', label: 'Rewards', icon: GemIcon },
+  { href: '/library', label: 'My Library', icon: Library },
 ];
 
 export function SidebarNav() {
