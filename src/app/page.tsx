@@ -5,7 +5,6 @@ import { mockDeals, mockBanners } from '@/lib/data';
 import { HeroCarousel } from '@/components/home/hero-carousel';
 import { MostPopular } from '@/components/home/most-popular';
 import { DealList } from '@/components/home/deal-list';
-import { PlatformSelector } from '@/components/home/platform-selector';
 import { useSettings } from '@/contexts/settings-context';
 import type { Deal } from '@/lib/types';
 import { getBestPriceDeal } from '@/lib/utils';
@@ -48,8 +47,6 @@ export default function HomePage() {
       <div className="space-y-8">
         <HeroCarousel banners={mockBanners} />
         
-        <PlatformSelector />
-
         <MostPopular deals={popularDeals} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
