@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { Gamepad2, Search, Tag, TrendingUp, Users, ChevronDown, Heart, Bell, Library, Moon, Sun, Check } from 'lucide-react';
@@ -88,7 +89,13 @@ export function Header() {
         <div className="mx-auto flex h-16 w-full max-w-screen-xl items-center justify-between gap-6 px-6">
             <div className="flex items-center gap-6">
                 <Link href="/" className="flex items-center gap-2">
-                    <h1 className="text-xl text-primary font-bold">op.deals</h1>
+                    <Image
+                      src="/logo.png"
+                      alt="op.deals logo"
+                      width={120}
+                      height={30}
+                      className="object-contain"
+                    />
                 </Link>
                 <nav className="hidden md:flex items-center gap-4">
                     {mainNavItems.map((item) => (
