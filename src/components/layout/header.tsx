@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { Gamepad2, Search, Tag, TrendingUp, Users, ChevronDown, Heart, Bell, Library, Moon, Sun } from 'lucide-react';
+import { Gamepad2, Search, Tag, TrendingUp, Users, ChevronDown, Heart, Bell, Library, Moon, Sun, Check } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,7 @@ import { UserNav } from '../auth/user-nav';
 import { Switch } from '../ui/switch';
 import { Label } from '../ui/label';
 import { useSettings } from '@/contexts/settings-context';
+import { useState } from 'react';
 
 const mainNavItems = [
   { href: '/', label: 'Deals' },
@@ -28,10 +29,19 @@ const moreNavItems = [
     { href: '#', label: 'Community', icon: Users },
 ];
 
+const regions = [
+  { name: 'India', flag: '🇮🇳', currency: 'INR' },
+  { name: 'United States', flag: '🇺🇸', currency: 'USD' },
+  { name: 'Europe', flag: '🇪🇺', currency: 'EUR' },
+  { name: 'United Kingdom', flag: '🇬🇧', currency: 'GBP' },
+  { name: 'Japan', flag: '🇯🇵', currency: 'JPY' },
+];
+
 export function Header() {
   const pathname = usePathname();
   const { keyshopsEnabled, setKeyshopsEnabled } = useSettings();
   const { theme, setTheme } = useTheme();
+  const [selectedRegion, setSelectedRegion] = useState(regions[0]);
 
   return (
     <header className="sticky top-0 z-20 flex flex-col border-b bg-background/95 backdrop-blur-sm">
@@ -39,11 +49,26 @@ export function Header() {
       <div className="bg-muted/30 py-1 text-xs text-muted-foreground">
         <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between px-6">
             <div className="flex items-center gap-4">
-                 <Button variant="ghost" className="p-0 h-auto flex items-center gap-1 text-xs">
-                    <span className="text-lg">🇮🇳</span>
-                    <span>Region & Currency</span>
-                    <ChevronDown className="h-4 w-4" />
-                </Button>
+                 <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="p-0 h-auto flex items-center gap-1 text-xs">
+                      <span className="text-lg">{selectedRegion.flag}</span>
+                      <span>{selectedRegion.name} &bull; {selectedRegion.currency}</span>
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    <DropdownMenuGroup>
+                      {regions.map((region) => (
+                        <DropdownMenuItem key={region.name} onSelect={() => setSelectedRegion(region)}>
+                          <span className="text-lg mr-2">{region.flag}</span>
+                          <span>{region.name} ({region.currency})</span>
+                          {selectedRegion.name === region.name && <Check className="ml-auto h-4 w-4" />}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
             </div>
             <div className="flex items-center gap-4">
                  <div className="flex items-center space-x-2">
