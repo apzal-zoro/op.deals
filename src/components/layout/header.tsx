@@ -13,7 +13,7 @@ import { UserNav } from '../auth/user-nav';
 import { Switch } from '../ui/switch';
 import { Label } from '../ui/label';
 import { useSettings } from '@/contexts/settings-context';
-import { useState } from 'react';
+import { regions } from '@/contexts/settings-context';
 
 const mainNavItems = [
   { href: '/', label: 'Deals' },
@@ -29,19 +29,10 @@ const moreNavItems = [
     { href: '#', label: 'Community', icon: Users },
 ];
 
-const regions = [
-  { name: 'India', flag: '🇮🇳', currency: 'INR' },
-  { name: 'United States', flag: '🇺🇸', currency: 'USD' },
-  { name: 'Europe', flag: '🇪🇺', currency: 'EUR' },
-  { name: 'United Kingdom', flag: '🇬🇧', currency: 'GBP' },
-  { name: 'Japan', flag: '🇯🇵', currency: 'JPY' },
-];
-
 export function Header() {
   const pathname = usePathname();
-  const { keyshopsEnabled, setKeyshopsEnabled } = useSettings();
   const { theme, setTheme } = useTheme();
-  const [selectedRegion, setSelectedRegion] = useState(regions[0]);
+  const { keyshopsEnabled, setKeyshopsEnabled, selectedRegion, setSelectedRegion } = useSettings();
 
   return (
     <header className="sticky top-0 z-20 flex flex-col border-b bg-background/95 backdrop-blur-sm">
