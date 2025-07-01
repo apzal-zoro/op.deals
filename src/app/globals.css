@@ -21,8 +21,8 @@
     --muted-foreground: 0 0% 70%; /* #B3B3B3 */
     --accent: 169 100% 50%; /* #00FFC6 - Neon Mint */
     --accent-foreground: 169 100% 5%;
-    --destructive: 339 100% 56%; /* #FF206E - Hot Pink */
-    --destructive-foreground: 339 100% 98%;
+    --destructive: 0 84% 60%; /* #FF3B30 - Vibrant Red */
+    --destructive-foreground: 0 0% 98%;
     --border: 0 0% 18%; /* #2D2D2D */
     --input: 0 0% 18%; /* #2D2D2D */
     --ring: 217 91% 60%; /* #4F86F7 - Vibrant Blue */
@@ -48,41 +48,41 @@
   }
 
   .light {
-    --background: 260 100% 99%; /* For solid component backgrounds */
-    --background-start: 10 100% 98%; /* Light Peachy Pink */
+    --background: 0 0% 98%; /* Light Gray */
+    --background-start: 10 100% 98%; /* Soft Peach */
     --background-end: 260 100% 99%; /* Light Lavender */
 
-    --foreground: 256 25% 20%; /* Dark slate purple */
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 256 25% 20%;
+    --foreground: 222 47% 11%; /* Dark Blue/Black */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 256 25% 20%;
-    --primary: 325 86% 57%; /* Vibrant Magenta/Pink */
-    --primary-foreground: 0 0% 100%; /* White */
-    --secondary: 260 100% 96%; /* Lighter lavender */
-    --secondary-foreground: 256 25% 25%;
-    --muted: 260 100% 96%;
-    --muted-foreground: 256 15% 55%; /* Lighter slate purple */
-    --accent: 280 90% 65%; /* Vibrant Violet */
-    --accent-foreground: 0 0% 100%; /* White */
-    --destructive: 350 90% 60%; /* Hot Pink */
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%; /* Strong Blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%; /* Light Gray Blue */
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%; /* Muted Gray Blue */
+    --accent: 221 83% 53%; /* Strong Blue */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%; /* Vibrant Red */
     --destructive-foreground: 0 0% 100%;
-    --border: 260 50% 92%; /* Lavender gray */
-    --input: 260 50% 92%;
-    --ring: 325 86% 57%;
+    --border: 220 13% 91%; /* Light Border Gray */
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
     
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 256 25% 20%;
-    --sidebar-primary: 325 86% 57%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 221 83% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 260 100% 96%;
-    --sidebar-accent-foreground: 256 25% 20%;
-    --sidebar-border: 260 50% 92%;
-    --sidebar-ring: 325 86% 57%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 221 83% 53%;
 
-    --cursor-url: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 5v7m0 8v7m-11-7h7m8 0h7" stroke="%23e769c8" stroke-width="2" stroke-linecap="round"/></svg>');
+    --cursor-url: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 5v7m0 8v7m-11-7h7m8 0h7" stroke="%234361EE" stroke-width="2" stroke-linecap="round"/></svg>');
   }
 
   * {

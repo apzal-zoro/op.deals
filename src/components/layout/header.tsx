@@ -2,13 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Gamepad2, Search, MoreVertical, Tag, TrendingUp, Users, ChevronDown, Heart, Bell, Library } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useTheme } from 'next-themes';
+import { Gamepad2, Search, Tag, TrendingUp, Users, ChevronDown, Heart, Bell, Library, Moon, Sun } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { UserNav } from '../auth/user-nav';
+import { Switch } from '../ui/switch';
+import { Label } from '../ui/label';
+import { useSettings } from '@/contexts/settings-context';
 
 const mainNavItems = [
   { href: '/', label: 'Deals' },
@@ -26,9 +30,43 @@ const moreNavItems = [
 
 export function Header() {
   const pathname = usePathname();
+  const { keyshopsEnabled, setKeyshopsEnabled } = useSettings();
+  const { theme, setTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-20 flex flex-col border-b bg-background/95 backdrop-blur-sm">
+      {/* Top bar */}
+      <div className="bg-muted/30 py-1 text-xs text-muted-foreground">
+        <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between px-6">
+            <div className="flex items-center gap-4">
+                 <Button variant="ghost" className="p-0 h-auto flex items-center gap-1 text-xs">
+                    <span className="text-lg">🇮🇳</span>
+                    <span>Region & Currency</span>
+                    <ChevronDown className="h-4 w-4" />
+                </Button>
+            </div>
+            <div className="flex items-center gap-4">
+                 <div className="flex items-center space-x-2">
+                    <Label htmlFor="keyshops-switch" className="cursor-pointer">Keyshops</Label>
+                    <Switch
+                        id="keyshops-switch"
+                        checked={keyshopsEnabled}
+                        onCheckedChange={setKeyshopsEnabled}
+                    />
+                </div>
+                 <div className="flex items-center space-x-2">
+                    <Sun className="h-4 w-4" />
+                    <Switch
+                        id="theme-switch"
+                        checked={theme === 'dark'}
+                        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+                    />
+                    <Moon className="h-4 w-4" />
+                </div>
+            </div>
+        </div>
+      </div>
+      
       {/* Main header */}
       <div className="w-full">
         <div className="mx-auto flex h-16 w-full max-w-screen-xl items-center justify-between gap-6 px-6">

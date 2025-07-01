@@ -16,20 +16,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { useSettings } from '@/contexts/settings-context';
-import { useTheme } from 'next-themes';
-import { ChevronRight, Moon, Sun, LogOut, Settings, Bell, Heart, Library, Trash2, BellRing } from 'lucide-react';
+import { LogOut, Settings, Bell, Heart, Library, Trash2, BellRing } from 'lucide-react';
 import Link from 'next/link';
 
 export function UserNav() {
-  const { keyshopsEnabled, setKeyshopsEnabled } = useSettings();
-  const { theme, setTheme } = useTheme();
-
-  // This prevents the dropdown from closing when interacting with switches
-  const preventDefault = (e: Event) => e.preventDefault();
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -106,42 +96,6 @@ export function UserNav() {
                 Sign out
             </Link>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={preventDefault}>
-                <span>Default Platform: PC</span>
-                <ChevronRight className="h-4 w-4 ml-auto" />
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={preventDefault}>
-                 <span className="flex items-center">
-                    <span className="mr-2 text-lg">🇮🇳</span> Region & Currency
-                 </span>
-                <ChevronRight className="h-4 w-4 ml-auto" />
-            </DropdownMenuItem>
-             <DropdownMenuItem onSelect={preventDefault} className="p-0">
-                <Label htmlFor="keyshops-switch-dd" className="flex items-center justify-between w-full cursor-pointer p-2">
-                    <span>Keyshops</span>
-                    <Switch
-                        id="keyshops-switch-dd"
-                        checked={keyshopsEnabled}
-                        onCheckedChange={setKeyshopsEnabled}
-                    />
-                </Label>
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={preventDefault} className="p-0">
-                <Label htmlFor="theme-switch-dd" className="flex items-center justify-between w-full cursor-pointer p-2">
-                    <span className="flex items-center">
-                        {theme === 'dark' ? <Moon className="mr-2"/> : <Sun className="mr-2"/>}
-                        Theme
-                    </span>
-                    <Switch
-                        id="theme-switch-dd"
-                        checked={theme === 'dark'}
-                        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
-                    />
-                </Label>
-            </DropdownMenuItem>
-        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
