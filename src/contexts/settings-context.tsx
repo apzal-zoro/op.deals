@@ -14,6 +14,16 @@ export const regions: Region[] = [
   { name: 'Europe', flag: '🇪🇺', currency: 'EUR' },
   { name: 'United Kingdom', flag: '🇬🇧', currency: 'GBP' },
   { name: 'Japan', flag: '🇯🇵', currency: 'JPY' },
+  { name: 'Australia', flag: '🇦🇺', currency: 'AUD' },
+  { name: 'Brazil', flag: '🇧🇷', currency: 'BRL' },
+  { name: 'Canada', flag: '🇨🇦', currency: 'CAD' },
+  { name: 'China', flag: '🇨🇳', currency: 'CNY' },
+  { name: 'Mexico', flag: '🇲🇽', currency: 'MXN' },
+  { name: 'Russia', flag: '🇷🇺', currency: 'RUB' },
+  { name: 'Singapore', flag: '🇸🇬', currency: 'SGD' },
+  { name: 'South Africa', flag: '🇿🇦', currency: 'ZAR' },
+  { name: 'South Korea', flag: '🇰🇷', currency: 'KRW' },
+  { name: 'Switzerland', flag: '🇨🇭', currency: 'CHF' },
 ];
 
 type SettingsContextType = {
