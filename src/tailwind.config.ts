@@ -1,3 +1,5 @@
-// This file is intentionally left blank to resolve a configuration conflict.
+// This file re-exports the root Tailwind configuration to resolve a module resolution issue.
 // The primary Tailwind configuration is located at the project root.
-export default {};
+import rootConfig from '../../tailwind.config';
+
+export default rootConfig;
